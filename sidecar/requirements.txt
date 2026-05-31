@@ -1,0 +1,39 @@
+# Korero sidecar Python dependencies
+# Install with: pip install -r requirements.txt
+#
+# Notes:
+#   - Python 3.11 is required (3.12 has compatibility issues with some pyannote deps)
+#   - On Apple Silicon, torch uses Metal Performance Shaders (MPS) automatically
+#   - pyannote.audio 3.x requires a Hugging Face token to download the model
+#   - Models are cached to ~/.cache/huggingface/ and ~/.cache/torch/
+
+# Core ML
+torch>=2.2.0
+torchaudio>=2.2.0
+
+# Transcription
+whisperx>=3.1.5
+faster-whisper>=1.0.0
+ctranslate2>=4.3.0
+
+# Speaker diarisation
+pyannote.audio>=3.1.0
+
+# Audio / video processing
+ffmpeg-python>=0.2.0
+imageio-ffmpeg>=0.5.1
+soundfile>=0.12.1
+librosa>=0.10.0
+
+# NLP / data
+transformers>=4.38.0
+huggingface-hub>=0.21.0
+tokenizers>=0.15.0
+numpy>=1.26.0
+pandas>=2.2.0
+scipy>=1.12.0
+scikit-learn>=1.4.0
+
+# Utilities
+tqdm>=4.66.0
+pyyaml>=6.0.0

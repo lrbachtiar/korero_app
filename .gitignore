@@ -1,0 +1,21 @@
+# JS
+node_modules/
+dist/
+
+# Rust build output (can be multiple GB)
+src-tauri/target/
+src-tauri/binaries/
+
+# Python
+sidecar/.venv/
+sidecar/dist/
+sidecar/build/
+sidecar/__pycache__/
+*.pyc
+
+# macOS
+.DS_Store
+
+# App bundles / release artifacts
+*.dmg
+*.app
