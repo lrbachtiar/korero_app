@@ -49,9 +49,12 @@ for APP in "${APP_PATHS[@]}"; do
   find "$INTERNAL" \( -name "*.so" -o -name "*.dylib" \) \
     -exec codesign --force --sign - {} \; 2>/dev/null || true
 
-  echo "🔏 2/3 Signing korero-sidecar executable …"
+  echo "🔏 2/3 Signing nested executables (sidecar, ffmpeg, ffprobe) …"
   SIDECAR="$APP/Contents/MacOS/korero-sidecar"
   [[ -f "$SIDECAR" ]] && codesign --force --sign - "$SIDECAR" 2>/dev/null || true
+  for exe in "$INTERNAL/imageio_ffmpeg/binaries/"ffmpeg-* "$INTERNAL/imageio_ffmpeg/binaries/ffprobe"; do
+    [[ -f "$exe" ]] && codesign --force --sign - "$exe" 2>/dev/null || true
+  done
 
   echo "🔏 3/3 Sealing app bundle (ad-hoc + entitlements) …"
   codesign --force --entitlements "$ENTITLEMENTS" --sign - "$APP"

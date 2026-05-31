@@ -363,13 +363,24 @@ async fn cancel_transcription(state: tauri::State<'_, SidecarState>) -> Result<(
 /// Run ffprobe to get file metadata (duration, size, codec…).
 #[tauri::command]
 async fn probe_file(app: AppHandle, file_path: String) -> Result<Value, String> {
-    // Try bundled ffprobe first, fall back to system
-    let ffprobe_path = app
-        .path()
-        .resource_dir()
-        .ok()
-        .map(|d| d.join("bin").join("ffprobe"))
-        .filter(|p| p.exists())
+    // Use the ffprobe bundled alongside the sidecar's ffmpeg, so the app is
+    // self-contained and works on Macs without a system ffmpeg install. The
+    // _internal/ dir lands in Resources/MacOS/ (release) or next to the exe in
+    // target/debug/ (dev). Fall back to a system ffprobe on PATH only if the
+    // bundled one is somehow absent.
+    const FFPROBE_REL: &str = "imageio_ffmpeg/binaries/ffprobe";
+    let mut candidates: Vec<PathBuf> = Vec::new();
+    if let Ok(res) = app.path().resource_dir() {
+        candidates.push(res.join("MacOS").join("_internal").join(FFPROBE_REL));
+    }
+    if let Ok(exe) = std::env::current_exe() {
+        if let Some(dir) = exe.parent() {
+            candidates.push(dir.join("_internal").join(FFPROBE_REL));
+        }
+    }
+    let ffprobe_path = candidates
+        .into_iter()
+        .find(|p| p.exists())
         .map(|p| p.to_string_lossy().to_string())
         .unwrap_or_else(|| "ffprobe".to_string());
 

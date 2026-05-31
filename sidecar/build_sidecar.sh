@@ -181,11 +181,29 @@ elif 'already defined' in src:
 PYEOF
 fi
 
+# ── Bundle a static ffprobe next to imageio-ffmpeg's ffmpeg ──────────────
+# imageio-ffmpeg ships ffmpeg but NOT ffprobe, and the pipeline needs both.
+# Relying on a system ffprobe via PATH fails on any Mac that doesn't have
+# ffmpeg installed (GUI apps also get a minimal PATH). We vendor a static,
+# fully self-contained arm64 ffprobe (system-libs only) and drop it where
+# transcribe.py's _find_ffprobe() already looks: alongside the ffmpeg binary.
+FFPROBE_VENDOR="vendor/ffprobe"
+FFPROBE_DEST_DIR="$INTERNAL_DEST/imageio_ffmpeg/binaries"
+if [[ -f "$FFPROBE_VENDOR" ]]; then
+  mkdir -p "$FFPROBE_DEST_DIR"
+  cp "$FFPROBE_VENDOR" "$FFPROBE_DEST_DIR/ffprobe"
+  chmod +x "$FFPROBE_DEST_DIR/ffprobe"
+  echo "🎬 Bundled static ffprobe → $FFPROBE_DEST_DIR/ffprobe"
+else
+  echo "⚠️  $FFPROBE_VENDOR not found — ffprobe will be missing from the bundle" >&2
+fi
+
 # ── Ad-hoc sign so macOS allows the binary and its libs when spawned ─────
 echo "🔏 Ad-hoc signing sidecar and bundled libraries…"
 codesign --force --sign - "$DEST/korero-sidecar-$TRIPLE" 2>/dev/null
 find "$INTERNAL_DEST" \( -name "*.so" -o -name "*.dylib" \) \
   -exec codesign --force --sign - {} \; 2>/dev/null
+[[ -f "$FFPROBE_DEST_DIR/ffprobe" ]] && codesign --force --sign - "$FFPROBE_DEST_DIR/ffprobe" 2>/dev/null
 echo "✅ Signing done"
 
 # ── Copy binary + symlink _internal into target/debug for tauri dev ──────

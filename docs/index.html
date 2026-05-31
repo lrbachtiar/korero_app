@@ -17,6 +17,7 @@
     <span class="nav-logo">Kōrero</span>
     <div class="nav-links">
       <a href="#how-it-works">How it works</a>
+      <a href="#install">Install</a>
       <a href="https://github.com/lrbachtiar/korero_app" target="_blank" rel="noopener" class="nav-github">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
           <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/>
@@ -44,7 +45,7 @@
       <div class="hero-cta">
         <a href="https://github.com/lrbachtiar/korero_app/releases/latest" class="btn-primary">
           Download for Mac
-          <span class="btn-sub">macOS 13+ · Apple Silicon &amp; Intel</span>
+          <span class="btn-sub">macOS 13+ · Apple Silicon (M1 or later)</span>
         </a>
         <a href="https://github.com/lrbachtiar/korero_app" class="btn-ghost">View source</a>
       </div>
@@ -317,11 +318,59 @@
     </div>
   </section>
 
+  <!-- ── Getting started ───────────────────────────────────────────── -->
+  <section class="setup" id="install">
+    <div class="section-inner">
+      <h2 class="section-title">Getting started</h2>
+      <div class="setup-list">
+
+        <div class="setup-step">
+          <div class="step-num">1</div>
+          <div>
+            <h3>Download &amp; install</h3>
+            <p>Download the <code class="inline-code">.dmg</code>, open it, and drag <strong>Kōrero</strong> onto the Applications folder.</p>
+          </div>
+        </div>
+
+        <div class="setup-step">
+          <div class="step-num">2</div>
+          <div>
+            <h3>Allow it to open (first launch only)</h3>
+            <p>Kōrero is signed but not yet notarised by Apple, so macOS blocks the very first launch with <em>“Apple could not verify Kōrero is free of malware.”</em> That’s expected — here’s how to open it, once:</p>
+            <p>Click <strong>Done</strong>, then open <strong>System Settings → Privacy &amp; Security</strong>. Scroll to the <strong>Security</strong> section, click <strong>Open Anyway</strong> next to the Kōrero message, and confirm with Touch ID or your password. After that it opens normally every time.</p>
+            <div class="setup-callout">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="m7 9 3 3-3 3M13 15h4"/></svg>
+              <span>Prefer the terminal? Run <code class="inline-code">xattr -cr "/Applications/Kōrero.app"</code>, then double-click. One time only.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="setup-step">
+          <div class="step-num">3</div>
+          <div>
+            <h3>Add a free Hugging Face token</h3>
+            <p>Speaker labels use two open models from Hugging Face. Create a free account and accept the terms for <a href="https://huggingface.co/pyannote/speaker-diarization-3.0" target="_blank" rel="noopener">speaker-diarization-3.0</a> and <a href="https://huggingface.co/pyannote/segmentation-3.0" target="_blank" rel="noopener">segmentation-3.0</a>, then create a token at <a href="https://huggingface.co/settings/tokens" target="_blank" rel="noopener">huggingface.co/settings/tokens</a>.</p>
+            <p>Paste the token into <strong>Kōrero → Preferences</strong>. It’s stored in your macOS Keychain, never in a file. The models download once and are cached locally forever.</p>
+          </div>
+        </div>
+
+        <div class="setup-step">
+          <div class="step-num">4</div>
+          <div>
+            <h3>Transcribe</h3>
+            <p>Drag an audio or video file onto Kōrero, set the number of speakers and the language, and start. Everything runs on your Mac — no internet needed after the one-time model download.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- ── Download CTA ───────────────────────────────────────────────── -->
   <section class="download" id="download">
     <div class="section-inner download-inner">
       <h2>Ready to try it?</h2>
-      <p class="download-sub">macOS 13 Ventura or later · Apple Silicon &amp; Intel · Free and open source</p>
+      <p class="download-sub">macOS 13 Ventura or later · Apple Silicon (M1 or later) · Free and open source</p>
       <a href="https://github.com/lrbachtiar/korero_app/releases/latest" class="btn-primary btn-large">
         Download Kōrero
         <span class="btn-sub">Requires a free Hugging Face account for speaker labels</span>

@@ -484,3 +484,36 @@ a:hover { text-decoration: underline; }
   margin-left: auto; font-size: 12px; color: var(--text-3);
 }
 @media (max-width: 600px) { .footer-note { margin-left: 0; } }
+
+/* ── Getting started / install ─────────────────────────────────────── */
+.setup {
+  padding: 80px 0;
+  border-top: 0.5px solid var(--border);
+  background: var(--bg-2);
+}
+.setup-list {
+  max-width: 720px; margin: 0 auto;
+  display: flex; flex-direction: column; gap: 30px;
+}
+.setup-step { display: flex; align-items: flex-start; gap: 18px; }
+.setup-step .step-num { margin-top: 1px; }
+.setup-step h3 { font-size: 16px; font-weight: 700; margin-bottom: 7px; }
+.setup-step p { font-size: 14px; line-height: 1.65; color: var(--text-2); }
+.setup-step p + p { margin-top: 8px; }
+.setup-step a { color: var(--accent); text-decoration: none; }
+.setup-step a:hover { text-decoration: underline; }
+.setup-step strong { color: var(--text); font-weight: 600; }
+.inline-code {
+  font-family: var(--mono); font-size: 12.5px;
+  background: var(--bg-card); border: 0.5px solid var(--border);
+  border-radius: 6px; padding: 2px 7px; color: var(--text);
+}
+.setup-callout {
+  margin-top: 12px;
+  display: flex; gap: 10px; align-items: flex-start;
+  background: rgba(255,159,10,0.08);
+  border: 0.5px solid rgba(255,159,10,0.25);
+  border-radius: 10px; padding: 12px 14px;
+  font-size: 13px; line-height: 1.6; color: var(--text-2);
+}
+.setup-callout svg { color: var(--amber); flex-shrink: 0; margin-top: 1px; }
