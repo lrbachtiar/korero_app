@@ -1,6 +1,7 @@
 {
   "name": "korero",
   "version": "0.1.0",
+  "author": "Luqman Bachtiar <lrbachtiar@gmail.com>",
   "private": true,
   "scripts": {
     "dev": "vite",
@@ -8,8 +9,10 @@
     "preview": "vite preview",
     "tauri": "tauri",
     "tauri:dev": "tauri dev",
-    "tauri:build": "tauri build && bash scripts/fix-bundle.sh",
-    "tauri:build:universal": "tauri build --target universal-apple-darwin && bash scripts/fix-bundle.sh"
+    "build:sidecar": "bash sidecar/build_sidecar.sh",
+    "tauri:build": "bash sidecar/build_sidecar.sh && tauri build && bash scripts/fix-bundle.sh",
+    "tauri:build:fast": "tauri build && bash scripts/fix-bundle.sh",
+    "tauri:build:universal": "bash sidecar/build_sidecar.sh && tauri build --target universal-apple-darwin && bash scripts/fix-bundle.sh"
   },
   "dependencies": {
     "react": "^18.3.1",
